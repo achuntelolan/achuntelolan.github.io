@@ -820,8 +820,18 @@ a:focus {
     border-right: 1px solid #ffffff;
 }
 
+.footer .footer-menu p a{
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 600;
+}
+
 .footer .footer-menu p:last-child {
     border: none;
+}
+
+.footer .footer-menu p a:hover {
+    color: #000000;
 }
 
 .footer .footer-social {
