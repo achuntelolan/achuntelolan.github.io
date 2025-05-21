@@ -66,11 +66,11 @@
   const date = now.toLocaleDateString('en-GB');
   const time = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
   const message = ` 
-  ✍️ ${title}
+  ✍️ * ${title} *
 
 ---------------------
 
-Golconda Express
+*Golconda Express*
 നഗര വാർത്തയ്ക്ക് പുതിയ മുഖം
 📅 ${date} ⏰ ${time}
 
@@ -79,10 +79,10 @@ Golconda Express
 
 ${content}
 
-💬 Join our WhatsApp Group
+💬 *Join our WhatsApp Group*
 👉 https://chat.whatsapp.com/HJB6gDFGu8K55leMxOFwNC
 
-📸 Instagram
+📸 *Instagram*
 👉 https://www.instagram.com/golconda.express?igsh=MTk1NHFqdThmanJ4bw==`;
   
   output.innerHTML = message.replace(title, `<strong>${title}</strong>`);
