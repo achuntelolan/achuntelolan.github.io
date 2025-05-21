@@ -53,20 +53,21 @@
   <button onclick="generateMessage()">Generate Message</button>
   <button onclick="copyMessage()">Copy Message</button>
   <div id="output"></div>
+
   <script>
     function generateMessage() {
-  const title = document.getElementById('title').value.trim();
-  const content = document.getElementById('content').value.trim();
-  const output = document.getElementById('output');
-  if (!title || !content) {
-    output.innerText = "⚠️ Please fill in both title and content.";
-    return;
-  }
-  const now = new Date();
-  const date = now.toLocaleDateString('en-GB');
-  const time = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-  const message = ` 
-  ✍️ *${title}*
+      const title = document.getElementById('title').value.trim();
+      const content = document.getElementById('content').value.trim();
+      const output = document.getElementById('output');
+      if (!title || !content) {
+        output.innerText = "⚠️ Please fill in both title and content.";
+        return;
+      }
+      const now = new Date();
+      const date = now.toLocaleDateString('en-GB');
+      const time = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+
+      const message = `✍️ *${title}*
 
 ---------------------
 
@@ -84,10 +85,45 @@ ${content}
 
 📸 *Instagram*
 👉 https://www.instagram.com/golconda.express?igsh=MTk1NHFqdThmanJ4bw==`;
-  
-  output.innerHTML = message.replace(title, `<strong>${title}</strong>`);
-}
 
+      // Bold title visually
+      const htmlMessage = message.replace(`*${title}*`, `<strong>${title}</strong>`);
+      output.innerHTML = htmlMessage;
+
+      // Store plain text for copying
+      output.setAttribute('data-plain', message);
+    }
+
+    function copyMessage() {
+      const output = document.getElementById('output');
+      const message = output.getAttribute('data-plain');
+      if (!message || message.includes("⚠️")) return;
+
+      // Use navigator.clipboard if available (modern, including iOS 15+)
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(message).then(() => {
+          alert("✅ Message copied to clipboard!");
+        }).catch(err => {
+          alert("❌ Failed to copy message.");
+          console.error(err);
+        });
+      } else {
+        // Fallback method
+        const tempTextarea = document.createElement("textarea");
+        tempTextarea.value = message;
+        tempTextarea.style.position = "fixed";  // avoid scroll jump
+        document.body.appendChild(tempTextarea);
+        tempTextarea.focus();
+        tempTextarea.select();
+        try {
+          document.execCommand("copy");
+          alert("✅ Message copied to clipboard!");
+        } catch (err) {
+          alert("❌ Failed to copy message.");
+        }
+        document.body.removeChild(tempTextarea);
+      }
+    }
   </script>
 </body>
 </html>
