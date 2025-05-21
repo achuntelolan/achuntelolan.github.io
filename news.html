@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8">
+  <title>Golconda Express Message Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+      background-color: #f9f9f9;
+    }
+    h2 {
+      color: #333;
+    }
+    textarea, input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #output {
+      white-space: pre-wrap;
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>📰 Golconda Express Message Generator</h2>
+  <label for="title">📝 News Title:</label>
+  <input type="text" id="title" placeholder="Enter news title here...">
+  <label for="content">📰 News Content:</label>
+  <textarea id="content" rows="5" placeholder="Enter news content here..."></textarea>
+  <button onclick="generateMessage()">Generate Message</button>
+  <button onclick="copyMessage()">Copy Message</button>
+  <div id="output"></div>
+  <script>
+    function generateMessage() {
+  const title = document.getElementById('title').value.trim();
+  const content = document.getElementById('content').value.trim();
+  const output = document.getElementById('output');
+  if (!title || !content) {
+    output.innerText = "⚠️ Please fill in both title and content.";
+    return;
+  }
+  const now = new Date();
+  const date = now.toLocaleDateString('en-GB');
+  const time = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  const message = ` 
+  ✍️ ${title}
+
+---------------------
+
+Golconda Express
+നഗര വാർത്തയ്ക്ക് പുതിയ മുഖം
+📅 ${date} ⏰ ${time}
+
+---------------------
+👇👇👇
+
+${content}
+
+💬 Join our WhatsApp Group
+👉 https://chat.whatsapp.com/HJB6gDFGu8K55leMxOFwNC
+
+📸 Instagram
+👉 https://www.instagram.com/golconda.express?igsh=MTk1NHFqdThmanJ4bw==`;
+  
+  output.innerHTML = message.replace(title, `<strong>${title}</strong>`);
+}
+
+  </script>
+</body>
+</html>
